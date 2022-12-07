@@ -1,6 +1,8 @@
 package com.example.ShoppingCartApp.controller;
 
+import com.example.ShoppingCartApp.dao.ProductDao;
 import com.example.ShoppingCartApp.dao.UserDao;
+import com.example.ShoppingCartApp.model.ProductModel;
 import com.example.ShoppingCartApp.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,8 @@ import java.util.Objects;
 public class ShoppingController {
     @Autowired
     private UserDao udao;
+    @Autowired
+    private ProductDao pdao;
 
     @CrossOrigin(origins = "*")
     @GetMapping("/")
@@ -58,5 +62,27 @@ public class ShoppingController {
         }
 
         return st;
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/fetchProducts")
+    public List<ProductModel> FetchProducts(){
+        return (List<ProductModel>) pdao.findAll();
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/addProducts", produces = "application/json", consumes = "application/json")
+    public HashMap<String, String> AddProduct(@RequestBody ProductModel pm){
+        pdao.save(pm);
+        HashMap<String, String> st = new HashMap<>();
+        st.put("status","failed");
+        st.put("message","product added successfully");
+        return st;
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchProducts", produces = "application/json", consumes = "application/json")
+    public List<ProductModel> SearchProduct(@RequestBody ProductModel pm){
+        return (List<ProductModel>) pdao.SearchProduct(pm.getTitle());
     }
 }
