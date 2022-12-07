@@ -75,7 +75,7 @@ public class ShoppingController {
     public HashMap<String, String> AddProduct(@RequestBody ProductModel pm){
         pdao.save(pm);
         HashMap<String, String> st = new HashMap<>();
-        st.put("status","failed");
+        st.put("status","success");
         st.put("message","product added successfully");
         return st;
     }
