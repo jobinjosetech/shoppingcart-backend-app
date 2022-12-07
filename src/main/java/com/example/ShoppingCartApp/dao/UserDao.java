@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface UserDao extends CrudRepository<UserModel,Integer> {
-    @Query(value = "SELECT `id`, `address`, `email`, `name`, `password`, `phone`, `username` FROM `user` WHERE `username`= :username", nativeQuery = true)
-    List<UserModel> FindUserLogin(@Param("username") String username);
+    @Query(value = "SELECT `id`, `address`, `email`, `name`, `password`, `phone` FROM `user` WHERE `email`= :email", nativeQuery = true)
+    List<UserModel> FindUserLogin(@Param("email") String email);
 }

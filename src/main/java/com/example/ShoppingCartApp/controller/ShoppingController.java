@@ -28,12 +28,12 @@ public class ShoppingController {
     @PostMapping(path = "/userRegistration", consumes = "application/json", produces = "application/json")
     public HashMap<String, String> UserRegistration(@RequestBody UserModel um){
         System.out.println(um);
-        List<UserModel> result = (List<UserModel>) udao.FindUserLogin(um.getUsername());
+        List<UserModel> result = (List<UserModel>) udao.FindUserLogin(um.getEmail());
         System.out.println(result);
         HashMap<String, String> st = new HashMap<>();
         if(result.size()!=0){
             st.put("status","success");
-            st.put("message","username already exists");
+            st.put("message","user already exists");
         }else{
             udao.save(um);
             st.put("status","success");
@@ -45,12 +45,12 @@ public class ShoppingController {
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/userLogin", produces = "application/json", consumes = "application/json")
     public HashMap<String, String> UserLogin(@RequestBody UserModel um){
-        System.out.println(um.getUsername());
-        List<UserModel> result = (List<UserModel>) udao.FindUserLogin(um.getUsername());
+        System.out.println(um.getEmail());
+        List<UserModel> result = (List<UserModel>) udao.FindUserLogin(um.getEmail());
         HashMap<String, String> st = new HashMap<>();
         if(result.size()==0){
             st.put("status","failed");
-            st.put("message","username doesn't exist");
+            st.put("message","user doesn't exist");
         }else{
             if(Objects.equals(result.get(0).getPassword(), um.getPassword())){
                 st.put("status","success");

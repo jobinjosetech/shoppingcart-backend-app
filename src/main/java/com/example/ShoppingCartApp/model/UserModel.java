@@ -15,19 +15,17 @@ public class UserModel {
     private String address;
     private String phone;
     private String email;
-    private String username;
     private String password;
 
     public UserModel() {
     }
 
-    public UserModel(int id, String name, String address, String phone, String email, String username, String password) {
+    public UserModel(int id, String name, String address, String phone, String email, String password) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        this.username = username;
         this.password = password;
     }
 
@@ -69,14 +67,6 @@ public class UserModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
