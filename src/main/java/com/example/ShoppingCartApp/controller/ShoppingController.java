@@ -70,8 +70,8 @@ public class ShoppingController {
         return (List<ProductModel>) pdao.findAll();
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/addProducts")
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/addProducts", produces = "application/json", consumes = "application/json")
     public HashMap<String, String> AddProduct(@RequestBody ProductModel pm){
         pdao.save(pm);
         HashMap<String, String> st = new HashMap<>();
@@ -80,8 +80,8 @@ public class ShoppingController {
         return st;
     }
 
-    @CrossOrigin("*")
-    @PostMapping("/searchProducts")
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchProducts", produces = "application/json", consumes = "application/json")
     public List<ProductModel> SearchProduct(@RequestBody ProductModel pm){
         return (List<ProductModel>) pdao.SearchProduct(pm.getTitle());
     }
